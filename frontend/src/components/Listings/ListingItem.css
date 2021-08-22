@@ -1,0 +1,24 @@
+.listing {
+  width: 70%;
+  min-width: 30%;
+}
+
+.listing__segment {
+  display: flex;
+  height: 250px;
+  margin-bottom: 10px !important;
+}
+
+.listing__image {
+  width: 150px;
+  height: 200px;
+}
+
+.listing__information {
+  margin: 10px;
+  margin-left: 15px;
+}
+
+.listing__rent {
+  margin-left: 35%;
+}

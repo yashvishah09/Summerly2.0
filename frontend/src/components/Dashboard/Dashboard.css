@@ -1,0 +1,37 @@
+.dashboard {
+  background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
+}
+
+.dashboard__image {
+  margin-left: 5rem;
+  margin-top: 5rem;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 100%;
+}
+
+.dashboard__info {
+  text-align: center;
+  margin-left: 37.5rem;
+  margin-top: 0.5rem;
+}
+
+.dashboard__info > p {
+  margin: 0;
+}
+
+.dashboard__edit {
+  position: absolute;
+  margin-left: 10.2rem !important;
+  margin-top: 5.3rem !important;
+}
+
+.arrow_up {
+  width: 0;
+  height: 0;
+  margin-left: 40.5rem;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid white;
+}

@@ -1,0 +1,71 @@
+h3 {
+  margin-left: 400px;
+}
+
+.listing1 {
+  /* margin-top: 40px; */
+  width: 100%;
+  height: 94vh;
+  background-color: rgba(163, 159, 159, 0);
+}
+
+.listing1_residence {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px;
+}
+
+.listing1_address {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.listing1_address > p {
+  margin: 20px 93px 20px 420px;
+}
+
+.listing1_input {
+  margin: 10px 0;
+}
+
+.listing1_roomNo {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.listing1_street {
+  width: 60%;
+  margin: 0 110px 5px 160px;
+}
+.listing1_zip {
+  width: 30%;
+
+  margin: 0 10px 5px 160px;
+}
+.listing1_city {
+  width: 29%;
+  margin-bottom: 5px;
+  margin-right: 1px;
+}
+
+.listing1_state {
+  width: 20%;
+  margin: 0 10px 0 160px;
+}
+
+.listing1_college {
+  width: 39%;
+}
+
+.listing1_button {
+  margin: 2px 4px 0px 1070px !important;
+}
+
+.menu_residence {
+  width: 200px !important;
+}
+
+.menu_roomNo {
+  width: 200px !important;
+  margin-left: 10px;
+}

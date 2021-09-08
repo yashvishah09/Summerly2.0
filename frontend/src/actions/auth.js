@@ -1,5 +1,16 @@
 import axios from 'axios';
-import { REGISTER_FAIL, REGISTER_SUCCESS, USER_LOADED, USER_FAILED, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from '../actions/types';
+import {
+  REGISTER_FAIL,
+  REGISTER_SUCCESS,
+  USER_LOADED,
+  USER_FAILED,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  CLEAR_PROFILE,
+  GET_USERS,
+  FORGOT_PASSWORD
+} from '../actions/types';
 import setAuthToken from '../utils/setAuthToken';
 
 //Load User
@@ -86,3 +97,30 @@ export const logout = () => (dispatch) => {
     type: CLEAR_PROFILE
   });
 };
+
+export const forgotPassword =
+  ({ email }) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    console.log(email);
+
+    const body = JSON.stringify({ email });
+
+    console.log(body);
+
+    try {
+      const res = await axios.post('api/v1/users/forgotpassword', body, config);
+
+      dispatch({
+        type: FORGOT_PASSWORD,
+        payload: res.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };

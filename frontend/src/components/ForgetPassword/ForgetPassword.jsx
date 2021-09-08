@@ -1,62 +1,84 @@
-import React from 'react';
+/* eslint-disable array-callback-return */
+import React, { useEffect, useState } from 'react';
 
 import { Segment, Form } from 'semantic-ui-react';
-import Slider from 'react-slick';
+
+import { setAlert } from '../../actions/alert';
+import { getAllUsers } from '../../actions/profile';
+
+import { connect } from 'react-redux';
 
 import './ForgetPassword.css';
+import Password from './Password';
 
-function ForgetPassword() {
-  let settings = {
-    arrows: true,
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
+function ForgetPassword({ getAllUsers, profile: { profiles } }) {
+  const [form, setForm] = useState({
+    email: ''
+  });
+  const [next, setNext] = useState(false);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    getAllUsers();
+  }, [getAllUsers]);
+
+  console.log(profiles);
+
+  const { email } = form;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const filteredUser =
+      profiles &&
+      profiles.data &&
+      profiles.data.data &&
+      profiles.data.data.filter((user) => {
+        if (email === user.email) {
+          return user;
+        }
+      });
+
+    // console.log(filteredUser);
+
+    setUser(filteredUser);
+
+    setNext(true);
   };
 
+  // console.log(user);
   return (
-    <div className='forgetPass'>
-      <Slider {...settings}>
-        <div>
-          <Segment style={{ width: '40%', marginLeft: '25%', marginTop: '10%', border: 'none' }}>
-            <div style={{ marginBottom: '1rem' }}>
-              <span>Welcome to Summerly</span>
-            </div>
+    <div>
+      {next === true ? (
+        <Password user={user} />
+      ) : (
+        <div className='forgetPass'>
+          <div>
+            <Segment style={{ width: '40%', marginLeft: '25%', marginTop: '10%', border: 'none' }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <span>Welcome to Summerly</span>
+              </div>
+              <Form>
+                <Form.Input
+                  onChange={(event) => setForm({ ...form, [event.target.name]: event.target.value })}
+                  value={email}
+                  name='email'
+                  label='Enter the email you registered your account with'
+                  placeholder='json.3@gmail.com'
+                />
 
-            <Form>
-              <Form.Input label='Enter your registered email address' placeholder='email address' />
-              <Form.Button content='submit' />
-            </Form>
-          </Segment>
+                <Form.Button content='submit' onClick={handleSubmit} />
+              </Form>
+            </Segment>
+          </div>
         </div>
-        <div>
-          <Segment style={{ width: '40%', marginLeft: '25%', marginTop: '10%', border: 'none' }}>
-            <div style={{ marginBottom: '1rem' }}>
-              <span>Welcome to Summerly</span>
-            </div>
-
-            <Form>
-              <Form.Input label='Enter your verification code that was sent to your email' placeholder='code' />
-              <Form.Button content='submit' />
-            </Form>
-          </Segment>
-        </div>
-        <div>
-          <Segment style={{ width: '40%', marginLeft: '25%', marginTop: '10%', border: 'none' }}>
-            <div style={{ marginBottom: '1rem' }}>
-              <span>Welcome to Summerly</span>
-            </div>
-            <Form>
-              <Form.Input label='Enter your new password' placeholder='new password' />
-              <Form.Input label='Enter your current password' placeholder='current password' />
-              <Form.Button content='submit' />
-            </Form>
-          </Segment>
-        </div>
-      </Slider>
+      )}
     </div>
   );
 }
 
-export default ForgetPassword;
+const mapStateToProps = (state) => ({
+  profile: state.profile
+});
+
+export default connect(mapStateToProps, { setAlert, getAllUsers })(ForgetPassword);

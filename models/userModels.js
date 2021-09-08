@@ -31,20 +31,19 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, ' Password is required'],
-      minlength: 8,
-      select: false
+      minlength: 8
     },
 
     confirmPassword: {
       type: String,
-      required: [true, ' Re-write password!'],
-      validate: {
-        // This only works on .create() or .save()
-        validator: function (el) {
-          return el === this.password;
-        },
-        message: 'Passwords are not the same'
-      }
+      required: [true, ' Re-write password!']
+      // validate: {
+      //   // This only works on .create() or .save()
+      //   validator: function (el) {
+      //     return el === this.password;
+      //   },
+      //   message: 'Passwords are not the same'
+      // }
     },
 
     photo: {

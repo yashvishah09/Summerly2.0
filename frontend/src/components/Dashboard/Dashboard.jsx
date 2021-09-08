@@ -19,7 +19,7 @@ function Dashboard({ profile: { profile, loading }, getCurrentUser, deleteCurren
 
   return (
     <div>
-      {profile !== null && profile !== undefined ? (
+      {profile && profile.data && profile.data.data ? (
         <div className='dashboard'>
           <Link to='/editprofile'>
             <Icon className='dashboard__edit' size='large' name='pencil' />

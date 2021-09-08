@@ -26,6 +26,9 @@ router.post('/login', login);
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
 
+router.route('/').get(getAllUsers);
+router.route('/:id').patch(updateUser);
+
 router.use(protect);
 
 router.patch('/updateMyPassword', updatePassword);
@@ -34,12 +37,12 @@ router.get('/auth', userCheck);
 
 router.get('/me', getMe, getUser);
 router.get('/userListing', getUserListing);
-router.patch('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
+router.put('/updateMe', uploadUserPhoto, resizeUserPhoto, updateMe);
 router.delete('/deleteMe', deleteMe);
 
-router.use(authController.restrictTo('admin'));
+// router.use(authController.restrictTo('admin'));
 
-router.route('/').get(getAllUsers).post(createUser);
+router.route('/').post(createUser);
 
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from './types';
+import { ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, GET_USERS, UPDATE_USER_FORGOT_PASSWORD } from './types';
 
 //Get current users profile
 export const getCurrentUser = () => async (dispatch) => {
@@ -28,7 +28,7 @@ export const updateCurrentUser = (formData, history) => async (dispatch) => {
     }
   };
   try {
-    const res = await axios.patch('/api/v1/users/updateMe', formData, config);
+    const res = await axios.put('/api/v1/users/updateMe', formData, config);
 
     dispatch({
       type: UPDATE_PROFILE,
@@ -60,3 +60,41 @@ export const deleteCurrentUser = () => async (dispatch) => {
     }
   }
 };
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/v1/users');
+
+    dispatch({
+      type: GET_USERS,
+      payload: res.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const forgotPassword =
+  ({ password, confirmPassword }, id) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const body = JSON.stringify({ password, confirmPassword });
+
+    console.log(body);
+
+    try {
+      const res = await axios.patch(`/api/v1/users/${id}`, body, config);
+
+      dispatch({
+        type: UPDATE_USER_FORGOT_PASSWORD,
+        payload: res.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };

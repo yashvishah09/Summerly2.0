@@ -7,8 +7,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_PROFILE,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  GET_USERS,
+  FORGOT_PASSWORD
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +17,8 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
+  users: [],
+  passwordChange: null,
   role: null
 };
 
@@ -29,6 +32,12 @@ export default function (state = initialState, action) {
         role: action.payload.role,
         isAuthenticated: true,
         loading: false
+      };
+
+    case FORGOT_PASSWORD:
+      return {
+        ...state,
+        passwordChange: action.payload
       };
 
     case REGISTER_SUCCESS:

@@ -104,6 +104,8 @@ exports.userCheck = catchAsync(async (req, res, next) => {
     console.log('Error');
     return next(new AppError('Server Error', 500));
   }
+
+  next();
 });
 
 exports.getUserListing = catchAsync(async (req, res, next) => {

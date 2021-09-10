@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Image } from 'semantic-ui-react';
-
 import './Home.css';
 
 function Home() {
   return (
     <div className='home'>
-      <h1>Summerly</h1>
+      <h1>
+        <span>Summerly</span>
+      </h1>
     </div>
   );
 }

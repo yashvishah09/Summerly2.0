@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Header, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import './Listing.css';
@@ -61,126 +61,141 @@ function AddListing({ createListing, auth }) {
     images.forEach((image) => data.append('images', image.name));
 
     createListing(data);
+
+    
   };
 
   return (
-    <div className='listing1'>
-      <div>
-        <h3>Help us collect some basic information about your listing....</h3>
+    <div className='listing'>
+      <Segment style={{margin: '2rem' , marginLeft:'12rem', boxShadow: '10px 10px 5px grey', width:'70%', height:'220vh'}}>
+        <Header className='listing__header'>Help us collect some basic information about your listing....</Header>
+  
+        <Form.Field  className='listing__residence listing__select'  label='What type of residence is your listing?' control='select' name='typeOfResidence' value={typeOfResidence} onChange={(e) => setTypeOfResidence(e.target.value)}>
+        <option value='House'>House</option>
+        <option value='Appartment'>Appartment</option>
+        </Form.Field>
+       
 
-        <div className='listing1_residence'>
-          <span>What type of residence is your listing?</span>
-          <select name='typeOfResidence' value={typeOfResidence} onChange={(e) => setTypeOfResidence(e.target.value)}>
-            <option value='House'>House</option>
-            <option value='Appartment'>Appartment</option>
-          </select>
-        </div>
-
-        <div className='listing1_address'>
+        <div className='listing__address'>
           <p>Address:</p>
-          <div className='listing1_input'>
+          <div className='listing__address__input'>
             <Form.Input
               name='street'
               value={street}
-              className='listing1_street'
+              
+              id='listing__street'
               placeholder='Street/Address Line'
               onChange={(e) => setStreet(e.target.value)}
             />
-            <Form.Input name='zipCode' value={zipCode} className='listing1_zip' placeholder='Zip Code' onChange={(e) => setZipCode(e.target.value)} />
-            <Form.Input name='city' value={city} className='listing1_city' placeholder='City' onChange={(e) => setCity(e.target.value)} />
-            <Form.Input name='state' value={state} className='listing1_state' placeholder='State' onChange={(e) => setState(e.target.value)} />
+            <div className='listing__zipCityDiv'>
+            <Form.Input name='zipCode' value={zipCode} id='listing__zip' placeholder='Zip Code' onChange={(e) => setZipCode(e.target.value)} />
+            <Form.Input name='city' value={city} id='listing__city' placeholder='City' onChange={(e) => setCity(e.target.value)} />
+            </div>
+            <Form.Input name='state' value={state} id='listing__state' placeholder='State' onChange={(e) => setState(e.target.value)} />
           </div>
         </div>
 
-        <div className='listing1_rent'>
-          <span>What is your monthly rent?</span>
+        <div className='listing__rent'>
+          <p>What is your monthly rent?</p>
           <Form.Input
             name='monthlyRent'
             value={monthlyRent}
-            className='input_field'
+            id='rent_field'
             placeholder='$...'
             onChange={(e) => setMonthlyRent(e.target.value)}
           />
         </div>
-        <div className='listing1_utility'>
-          <span>Are utilities included in monthly rent?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Are utilities included in monthly rent?</p>
+          <div className='listing__checkbox1' style={{marginLeft:'0'}}>
             <label>
               {' '}
               Yes
-              <input type='radio' name='utilityIncluded' value='Yes' onChange={(e) => setUtilityIncluded(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='utilityIncluded' value='Yes' onChange={(e) => setUtilityIncluded(e.target.value)} />
+         
             <label>
               {' '}
               No
-              <input type='radio' name='utilityIncluded' value='No' onChange={(e) => setUtilityIncluded(e.target.value)} />
-            </label>
+              </label>
+
+              <input type='radio'  id='listing__checkbox1_input' name='utilityIncluded' value='No' onChange={(e) => setUtilityIncluded(e.target.value)} />
+            
           </div>
         </div>
 
-        <div>
-          <span>Is your room your shared?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Is your room your shared?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
-              <input type='radio' name='roommates' value='Yes' onChange={(e) => setRoommates(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='roommates' value='Yes' onChange={(e) => setRoommates(e.target.value)} />
+            
             <label>
               {' '}
               No
-              <input type='radio' name='roommates' value='No' onChange={(e) => setRoommates(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='roommates' value='No' onChange={(e) => setRoommates(e.target.value)} />
+            
           </div>
         </div>
-        <div>
-          <span>Is your room furnished?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Is your room furnished?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
-              <input type='radio' name='isFurnished' value='Yes' onChange={(e) => setIsFurnished(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='isFurnished' value='Yes' onChange={(e) => setIsFurnished(e.target.value)} />
+            
             <label>
               {' '}
               No
-              <input type='radio' name='isFurnished' value='No' onChange={(e) => setIsFurnished(e.target.value)} />
-            </label>
+
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='isFurnished' value='No' onChange={(e) => setIsFurnished(e.target.value)} />
+           
           </div>
         </div>
-        <div className='listing4_laundry'>
-          <span>Is there in-site laundry?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Is there in-site laundry?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
-              <input type='radio' name='laundry' value='Yes' onChange={(e) => setLaundry(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input'  name='laundry' value='Yes' onChange={(e) => setLaundry(e.target.value)} />
+            
             <label>
               {' '}
               No
-              <input type='radio' name='laundry' value='No' onChange={(e) => setLaundry(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='laundry' value='No' onChange={(e) => setLaundry(e.target.value)} />
+           
           </div>
         </div>
-        <div className='listing4_parking'>
-          <span>Does your residence have resrved parking?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Does your residence have resrved parking?</p>
+          <div className='listing__checkbox1' style={{marginLeft:'0'}}>
             <label>
               {' '}
               Yes
-              <input type='radio' name='reservedParking' value='Yes' onChange={(e) => setReservedParking(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='reservedParking' value='Yes' onChange={(e) => setReservedParking(e.target.value)} />
+            
             <label>
               {' '}
               No
-              <input type='radio' name='reservedParking' value='No' onChange={(e) => setReservedParking(e.target.value)} />
-            </label>
+              </label>
+              <input type='radio'  id='listing__checkbox1_input' name='reservedParking' value='No' onChange={(e) => setReservedParking(e.target.value)} />
+            
           </div>
         </div>
 
-        <div>
-          <span>Do you have a sub-letter gender preference?</span>
+        <div className='listing__select'>
+          <p>Do you have a sub-letter gender preference?</p>
           <select name='genderPreference' value={genderPreference} onChange={(e) => setGenderPreference(e.target.value)}>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
@@ -188,31 +203,31 @@ function AddListing({ createListing, auth }) {
           </select>
         </div>
 
-        <div>
-          <span>When do you want to rent?</span>
+        <div className='listing__moveIn'>
+          <p>When do you want to rent?</p>
           <Form.Input name='moveInDate' value={moveInDate} placeholder='MM/DD/YYYY' onChange={(e) => setMoveInDate(e.target.value)} />
         </div>
-        <div>
-          <span>Place description.</span>
-          <Form.Input name='listingDescription' value={listingDescription} onChange={(e) => setListingDescription(e.target.value)} />
+        <div className='listing__description'>
+          <p>Place description.</p>
+          <Form.TextArea style={{width:'30rem', height:'10rem'}} name='listingDescription' value={listingDescription} onChange={(e) => setListingDescription(e.target.value)} placeholder='Specify more about the place you are willing to rent.'/>
         </div>
 
-        <div>
-          <span>By what title your listing needs to be displayed?</span>
-          <Form.Input name='title' value={title} onChange={(e) => setTitle(e.target.value)} />
+        <div className='listing__title'> 
+          <p>By what title your listing needs to be displayed?</p>
+          <Form.Input style={{width:'20rem'}} placeholder='1 BHK Room sharing' name='title' value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
 
-        <div>
-          <span>Choose a picture of your listing for your display</span>
-          <input type='file' filename='imageCover' onChange={handleImage} />
+        <div className='listing__imageCover'>
+          <p>Choose a picture of your listing for your display</p>
+          <input type='file' name='imageCover' onChange={handleImage} />
         </div>
 
-        <div>
-          <span>Upload images of your listing</span>
-          <input type='file' filename='images' multiple onChange={handleImages} />
+        <div className='listing__images'>
+          <p>Upload images of your listing</p>
+          <input type='file' name='images' multiple onChange={handleImages} />
         </div>
-        <Button type='submit' className='listing1_button' content='Submit' onClick={(e) => handleSubmit(e)} />
-      </div>
+        <Button type='submit' floated='right' className='listing__button' content='Submit' onClick={(e) => handleSubmit(e)} />
+      </Segment>
     </div>
   );
 }

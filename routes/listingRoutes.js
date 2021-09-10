@@ -32,7 +32,7 @@ router.route('/').get(getAllListings).post(protect, authController.restrictTo('l
 router
   .route('/:id')
   .get(getListing)
-  .patch(protect, authController.restrictTo('admin', 'lister'), uploadListingImages, resizeListingsImages, updateListing)
+  .put(protect, authController.restrictTo('admin', 'lister'), uploadListingImages, resizeListingsImages, updateListing)
   .delete(protect, authController.restrictTo('admin', 'lister'), deleteListing);
 
 module.exports = router;

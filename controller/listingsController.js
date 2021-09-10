@@ -27,10 +27,14 @@ exports.uploadListingImages = upload.fields([
 ]);
 
 exports.resizeListingsImages = catchAsync(async (req, res, next) => {
+
+  console.log(req);
+  
   if (!req.files.imageCover || !req.files.images) return next();
 
   //1) Cover Image
   req.body.imageCover = `listing-${req.params.id}-${Date.now()}-cover.jpeg`;
+  
   await sharp(req.files.imageCover[0].buffer)
     .resize(2000, 1333)
     .toFormat('jpeg')

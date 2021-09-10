@@ -11,7 +11,7 @@ function ShowListing({ getAListing, listing: { listing, loading }, match }) {
     getAListing(match.params.id);
   }, [getAListing, match.params.id]);
 
-  console.log(listing);
+  // console.log(listing);
 
   return (
     <div>

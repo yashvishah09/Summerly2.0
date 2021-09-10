@@ -35,7 +35,7 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
     previewImage: []
   });
 
-  console.log(listing);
+  // console.log(listing);
 
   useEffect(() => {
     getAListing(match.params.id);
@@ -79,7 +79,7 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
     });
   };
 
-  console.log(match.params.id);
+  // console.log(match.params.id);
 
   const clearImage = () => {
     setImageCover({ image: undefined, previewImage: undefined });

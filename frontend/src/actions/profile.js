@@ -85,7 +85,7 @@ export const forgotPassword =
 
     const body = JSON.stringify({ password, confirmPassword });
 
-    console.log(body);
+    
 
     try {
       const res = await axios.patch(`/api/v1/users/${id}`, body, config);

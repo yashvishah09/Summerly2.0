@@ -29,7 +29,7 @@ function Password({ setAlert, user, profile: { profiles }, getAllUsers, forgotPa
       }
     });
 
-  console.log('Current User', currentUser[0].id);
+  // console.log('Current User', currentUser[0].id);
   const handleSubmit = () => {
     if (password !== confirmPassword) {
       setAlert('Passwords does not match');

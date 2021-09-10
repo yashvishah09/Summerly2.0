@@ -27,12 +27,12 @@ function AddListing({ createListing, auth }) {
 
   const handleImage = (event) => {
     setImageCover(event.target.files[0]);
-    console.log(imageCover.name);
+    // console.log(imageCover.name);
   };
 
   const handleImages = (event) => {
     setImages([...images, ...event.target.files]);
-    console.log(images.map((image) => image.name));
+    // console.log(images.map((image) => image.name));
   };
 
   const handleSubmit = (event) => {

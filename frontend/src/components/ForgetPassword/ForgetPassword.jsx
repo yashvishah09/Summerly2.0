@@ -22,7 +22,7 @@ function ForgetPassword({ getAllUsers, profile: { profiles } }) {
     getAllUsers();
   }, [getAllUsers]);
 
-  console.log(profiles);
+ 
 
   const { email } = form;
 

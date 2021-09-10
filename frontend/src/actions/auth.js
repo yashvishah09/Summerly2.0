@@ -107,11 +107,11 @@ export const forgotPassword =
       }
     };
 
-    console.log(email);
+    
 
     const body = JSON.stringify({ email });
 
-    console.log(body);
+    
 
     try {
       const res = await axios.post('api/v1/users/forgotpassword', body, config);

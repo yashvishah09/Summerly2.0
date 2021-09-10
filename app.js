@@ -70,15 +70,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 
 //Serve static assests in production
-if(process.env.NODE_ENV === 'production'){
 
-  //Set static folder
-  app.use(express.static('frontend/build'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-  })  
-}
 app.all('*', (req, res, next) => {
   // res.status(404).json({
   //   status: 'fail',

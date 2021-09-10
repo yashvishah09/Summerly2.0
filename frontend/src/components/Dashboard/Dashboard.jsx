@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react';
 
 import { connect } from 'react-redux';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Card, Image } from 'semantic-ui-react';
 
 import { getCurrentUser, deleteCurrentUser } from '../../actions/profile';
-import Spinner from './Spinner';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
 import ListingDisplay from './ListingDisplay';
+import { Button } from 'semantic-ui-react';
 
 function Dashboard({ profile: { profile, loading }, getCurrentUser, deleteCurrentUser }) {
   useEffect(() => {
@@ -21,27 +21,42 @@ function Dashboard({ profile: { profile, loading }, getCurrentUser, deleteCurren
     <div>
       {profile && profile.data && profile.data.data ? (
         <div className='dashboard'>
-          <Link to='/editprofile'>
+          {/* <Link to='/editprofile'>
             <Icon className='dashboard__edit' size='large' name='pencil' />
-          </Link>
+          </Link> */}
 
-          <img className='dashboard__image' src={`/uploads/${profile.data.data.photo || profile.data.user.photo}`} alt='Profile Image' />
+          <div className='dashboard__userInfo'>
+            {profile.data.data.photo && (
+              <Image
+                size='small'
+                className='dashboard__image'
+                src={`/uploads/${profile.data.data.photo || profile.data.user.photo}`}
+                alt='Profile Image'
+              />
+            )}
 
-          <div className='dashboard__info'>
-            <p className='dashboard__name'>
-              {profile.data.data.firstName || profile.data.user.firstName} {profile.data.data.lastName || profile.data.user.lastName}
-            </p>
-            <p className='dashboard__role'>{profile.data.data.role || profile.data.user.role}</p>
-            <p className='dashboard__email'>{profile.data.data.email || profile.data.user.email}</p>
+            <Card className='dashboard__card'>
+              <Card.Content>
+                <Card.Header className='dashboard__cardHeader'>
+                  {profile.data.data.firstName || profile.data.user.firstName} {profile.data.data.lastName || profile.data.user.lastName}
+                </Card.Header>
+                <Card.Meta>{profile.data.data.role || profile.data.user.role}</Card.Meta>
+                <Card.Description>{profile.data.data.email || profile.data.user.email}</Card.Description>
+              </Card.Content>
+            </Card>
+
+            <Button onClick={() => deleteCurrentUser()}>Delete Account</Button>
+            <Link to='/editprofile'>
+              {' '}
+              <Button>Edit Account</Button>{' '}
+            </Link>
           </div>
-
-          <button onClick={() => deleteCurrentUser()}>Delete Account</button>
-
           <div className='arrow_up' />
 
-          {profile.data.data.listings.map((listing) => {
-            return <ListingDisplay key={listing._id} listing={listing} />;
-          })}
+          {profile.data.data.listings &&
+            profile.data.data.listings.map((listing) => {
+              return <ListingDisplay key={listing._id} listing={listing} />;
+            })}
         </div>
       ) : (
         <div> Your profile will loaded in a while. Thank you!</div>

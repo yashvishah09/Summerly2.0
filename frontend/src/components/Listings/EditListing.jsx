@@ -1,11 +1,14 @@
+/* eslint-disable no-lone-blocks */
 import React, { useEffect, useState } from 'react';
 
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Segment, Header } from 'semantic-ui-react';
 
 import { getAListing, updateListing } from '../../actions/listing';
 import { Icon } from 'semantic-ui-react';
+
+import './Listing.css';
 
 function EditListing({ getAListing, listing: { listing, loading }, match, updateListing, history }) {
   const [typeOfResidence, setTypeOfResidence] = useState('');
@@ -37,7 +40,10 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
   useEffect(() => {
     getAListing(match.params.id);
 
-    setTypeOfResidence(loading || !listing.data.data.typeOfResidence ? '' : listing.data.data.typeOfResidence);
+    // eslint-disable-next-line no-lone-blocks
+    
+       {listing && listing.data && listing.data.data && 
+        setTypeOfResidence(loading || !listing.data.data.typeOfResidence ? '' : listing.data.data.typeOfResidence);
     setState(loading || !listing.data.data.state ? '' : listing.data.data.state);
     setCity(loading || !listing.data.data.city ? '' : listing.data.data.city);
     setMonthlyRent(loading || !listing.data.data.monthlyRent ? '' : listing.data.data.monthlyRent);
@@ -52,9 +58,9 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
     setListingDescription(loading || !listing.data.data.listingDescription ? '' : listing.data.data.listingDescription);
     setTitle(loading || !listing.data.data.title ? '' : listing.data.data.title);
     setGenderPreference(loading || !listing.data.data.genderPreference ? '' : listing.data.data.genderPreference);
-    setImages(loading || !listing.data.data.images ? '' : listing.data.data.images);
-    setImageCover({ image: loading || !listing.data.data.imageCover ? '' : listing.data.data.imageCover });
-  }, [getAListing, match.params.id]);
+    setImages(loading || !listing.data.data.images ? '' : listing.data.data.images);}
+    setImageCover({ image: loading || !listing.data.data.imageCover ? '' : listing.data.data.imageCover });}
+  , [getAListing, match.params.id]);
 
   const handleImage = (event) => {
     setImageCover({ image: event.target.files[0], previewImage: URL.createObjectURL(event.target.files[0]) });
@@ -107,147 +113,164 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
   };
 
   return (
-    <div className='listing1'>
-      <div>
-        <h3>Help us collect some basic information about your listing....</h3>
+    <div className='listing'>
+      <Segment style={{margin: '2rem' , marginLeft:'12rem', boxShadow: '10px 10px 5px grey', width:'70%', height:'220vh'}}>
 
-        <div className='listing1_residence'>
-          <span>What type of residence is your listing?</span>
-          <select name='typeOfResidence' value={typeOfResidence} onChange={(e) => setTypeOfResidence(e.target.value)}>
-            <option value='House'>House</option>
-            <option value='Appartment'>Appartment</option>
-          </select>
-        </div>
+        <Header className='listing__header'>Help us collect some basic information about your listing....</Header>
 
-        <div className='listing1_address'>
+
+        <Form.Field  className='listing__residence listing__select'  label='What type of residence is your listing?' control='select' name='typeOfResidence' value={typeOfResidence} onChange={(e) => setTypeOfResidence(e.target.value)}>
+        <option value='House'>House</option>
+        <option value='Appartment'>Appartment</option>
+        </Form.Field>
+   
+        
+
+        <div className='listing__address'>
           <p>Address:</p>
-          <div className='listing1_input'>
+          <div className='listing__address__input'>
             <Form.Input
               name='street'
               value={street}
-              className='listing1_street'
+              id='listing__street'
               placeholder='Street/Address Line'
               onChange={(e) => setStreet(e.target.value)}
             />
-            <Form.Input name='zipCode' value={zipCode} className='listing1_zip' placeholder='Zip Code' onChange={(e) => setZipCode(e.target.value)} />
-            <Form.Input name='city' value={city} className='listing1_city' placeholder='City' onChange={(e) => setCity(e.target.value)} />
-            <Form.Input name='state' value={state} className='listing1_state' placeholder='State' onChange={(e) => setState(e.target.value)} />
+            <div className='listing__zipCityDiv'>
+            <Form.Input name='zipCode' value={zipCode} id='listing__zip' placeholder='Zip Code' onChange={(e) => setZipCode(e.target.value)} />
+            <Form.Input name='city' value={city} id='listing__city' placeholder='City' onChange={(e) => setCity(e.target.value)} />
+            </div>
+            <Form.Input name='state' value={state} id='listing__state' placeholder='State' onChange={(e) => setState(e.target.value)} />
           </div>
         </div>
 
-        <div className='listing1_rent'>
-          <span>What is your monthly rent?</span>
+        <div className='listin__rent'>
+          <p>What is your monthly rent?</p>
           <Form.Input
             name='monthlyRent'
             value={monthlyRent}
-            className='input_field'
+            id='rent_field'
             placeholder='$...'
             onChange={(e) => setMonthlyRent(e.target.value)}
           />
         </div>
-        <div className='listing1_utility'>
-          <span>Are utilities included in monthly rent?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Are utilities included in monthly rent?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
+              </label>
               <input
                 type='radio'
+                id='listing__checkbox1_input'
                 checked={utilityIncluded === 'Yes'}
                 name='utilityIncluded'
                 value='Yes'
                 onChange={(e) => setUtilityIncluded(e.target.value)}
               />
-            </label>
+            
             <label>
               {' '}
               No
+              </label>
               <input
                 type='radio'
+                id='listing__checkbox1_input'
                 checked={utilityIncluded === 'No'}
                 name='utilityIncluded'
                 value='No'
                 onChange={(e) => setUtilityIncluded(e.target.value)}
               />
-            </label>
+           
           </div>
         </div>
 
-        <div>
-          <span>Is your room your shared?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Is your room your shared?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
-              <input type='radio' checked={roommates === 'Yes'} name='roommates' value='Yes' onChange={(e) => setRoommates(e.target.value)} />
-            </label>
+              </label>
+              <input id='listing__checkbox1_input' type='radio' checked={roommates === 'Yes'} name='roommates' value='Yes' onChange={(e) => setRoommates(e.target.value)} />
+            
             <label>
               {' '}
               No
-              <input type='radio' checked={roommates === 'No'} name='roommates' value='No' onChange={(e) => setRoommates(e.target.value)} />
-            </label>
+              </label>
+              <input id='listing__checkbox1_input' type='radio' checked={roommates === 'No'} name='roommates' value='No' onChange={(e) => setRoommates(e.target.value)} />
+            
           </div>
         </div>
-        <div>
-          <span>Is your room furnished?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Is your room furnished?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
-              <input type='radio' checked={isFurnished === 'Yes'} name='isFurnished' value='Yes' onChange={(e) => setIsFurnished(e.target.value)} />
-            </label>
+              </label>
+              <input id='listing__checkbox1_input' type='radio' checked={isFurnished === 'Yes'} name='isFurnished' value='Yes' onChange={(e) => setIsFurnished(e.target.value)} />
+            
             <label>
               {' '}
               No
-              <input type='radio' checked={isFurnished === 'No'} name='isFurnished' value='No' onChange={(e) => setIsFurnished(e.target.value)} />
-            </label>
+              </label>
+              <input id='listing__checkbox1_input' type='radio' checked={isFurnished === 'No'} name='isFurnished' value='No' onChange={(e) => setIsFurnished(e.target.value)} />
+            
           </div>
         </div>
-        <div className='listing4_laundry'>
-          <span>Is there in-site laundry?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Is there in-site laundry?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
-              <input type='radio' checked={laundry === 'Yes'} name='laundry' value='Yes' onChange={(e) => setLaundry(e.target.value)} />
-            </label>
+              </label>
+              <input  id='listing__checkbox1_input' type='radio' checked={laundry === 'Yes'} name='laundry' value='Yes' onChange={(e) => setLaundry(e.target.value)} />
+            
             <label>
               {' '}
               No
-              <input type='radio' checked={laundry === 'No'} name='laundry' value='No' onChange={(e) => setLaundry(e.target.value)} />
-            </label>
+              </label>
+              <input id='listing__checkbox1_input' type='radio' checked={laundry === 'No'} name='laundry' value='No' onChange={(e) => setLaundry(e.target.value)} />
+            
           </div>
         </div>
-        <div className='listing4_parking'>
-          <span>Does your residence have resrved parking?</span>
-          <div>
+        <div className='listing__checkbox'>
+          <p>Does your residence have resrved parking?</p>
+          <div className='listing__checkbox1'>
             <label>
               {' '}
               Yes
+              </label>
               <input
                 type='radio'
+                id='listing__checkbox1_input'
                 checked={reservedParking === 'Yes'}
                 name='reservedParking'
                 value='Yes'
                 onChange={(e) => setReservedParking(e.target.value)}
               />
-            </label>
+           
             <label>
               {' '}
               No
+              </label>
               <input
                 type='radio'
+                id='listing__checkbox1_input'
                 checked={reservedParking === 'No'}
                 name='reservedParking'
                 value='No'
                 onChange={(e) => setReservedParking(e.target.value)}
               />
-            </label>
+            
           </div>
         </div>
 
-        <div>
-          <span>Do you have a sub-letter gender preference?</span>
+        <div className='listing__select'>
+          <p>Do you have a sub-letter gender preference?</p>
           <select name='genderPreference' value={genderPreference} onChange={(e) => setGenderPreference(e.target.value)}>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
@@ -255,22 +278,22 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
           </select>
         </div>
 
-        <div>
-          <span>When do you want to rent?</span>
+        <div className='listing__moveIn'>
+          <p>When do you want to rent?</p>
           <Form.Input name='moveInDate' value={moveInDate} placeholder='MM/DD/YYYY' onChange={(e) => setMoveInDate(e.target.value)} />
         </div>
-        <div>
-          <span>Place description.</span>
-          <Form.Input name='listingDescription' value={listingDescription} onChange={(e) => setListingDescription(e.target.value)} />
+        <div className='listing__description'>
+          <p>Place description.</p>
+          <Form.TextArea style={{width:'30rem', height:'10rem'}} name='listingDescription' value={listingDescription} onChange={(e) => setListingDescription(e.target.value)} />
         </div>
 
-        <div>
-          <span>By what title your listing needs to be displayed?</span>
+        <div className='listing__title'>
+          <p>By what title your listing needs to be displayed?</p>
           <Form.Input name='title' value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
 
-        <div>
-          <span>Choose a picture of your listing for your display</span>
+        <div className='listing__imageCover'>
+          <p>Choose a picture of your listing for your display</p>
           <input type='file' style={{ color: 'transparent', width: '6rem' }} filename='imageCover' onChange={(e) => handleImage(e)} />
           {imageCover.previewImage && (
             <div>
@@ -280,8 +303,8 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
           )}
         </div>
 
-        <div>
-          <span>Upload images of your listing</span>
+        <div className='listing__images'>
+          <p>Upload images of your listing</p>
           <input type='file' filename='images' style={{ color: 'transparent' }} multiple onChange={(e) => handleImages(e)} />
           <span>{images.imageList && images.imageList.map((image) => <span>{image.name}</span>)}</span>
           {images.previewImage &&
@@ -292,9 +315,11 @@ function EditListing({ getAListing, listing: { listing, loading }, match, update
               </div>
             ))}
         </div>
-        <Button type='submit' className='listing1_button' content='Update' onClick={(e) => handleSubmit(e)} />
+        
+        <Button type='submit' floated='right' className='listing1_button' content='Update' onClick={(e) => handleSubmit(e)} />
+        </Segment>
       </div>
-    </div>
+  
   );
 }
 

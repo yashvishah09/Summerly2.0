@@ -16,22 +16,22 @@ function ListingItem({ listing }) {
   // };
 
   return (
-    <div className='listing'>
+    <div className='listingItem'>
       <Link to={`/listings/${listing._id}`}>
-        <Segment className='listing__segment'>
+        <Segment className='listingItem__segment'>
           <img src={`/uploads/${listing.imageCover}`} className='listing__image' />
 
-          <div className='listing__information'>
-            <span className='listing__title'>{listing.title}</span>
+          <div className='listingItem__information'>
+            <p className='listing__title'>{listing.title}</p>
             <div>
-              <span className='listing__city'>{listing.city}</span>|
-              <span className='listing__date'>{moment(listing.postedAt).format('MM/DD/YYYY')}</span>
+              <span className='listingItem__city'>{listing.city}</span>|
+              <span className='listingItem__date'>{moment(listing.postedAt).format('MM/DD/YYYY')}</span>
             </div>
 
-            <p className='listing__description'>{listing.listingDescription}</p>
+            <p className='listingItem__description'>{listing.listingDescription}</p>
           </div>
 
-          <p className='listing__rent'>${listing.monthlyRent}</p>
+          <p className='listingItem__rent'>${listing.monthlyRent}</p>
         </Segment>
       </Link>
     </div>

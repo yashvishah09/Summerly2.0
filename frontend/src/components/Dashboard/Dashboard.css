@@ -3,27 +3,25 @@
 }
 
 .dashboard__image {
-  margin-left: 5rem;
-  margin-top: 5rem;
   width: 7rem;
   height: 7rem;
   border-radius: 100%;
+  margin-left: 5rem;
 }
 
-.dashboard__info {
-  text-align: center;
-  margin-left: 37.5rem;
-  margin-top: 0.5rem;
+.dashboard__card {
+  background-color: transparent !important;
+  width: 33% !important;
 }
 
-.dashboard__info > p {
-  margin: 0;
+.dashboard__cardHeader {
+  background-color: transparent;
+  height: max-content;
 }
 
-.dashboard__edit {
-  position: absolute;
-  margin-left: 10.2rem !important;
-  margin-top: 5.3rem !important;
+.dashboard__userInfo {
+  padding-top: 3rem;
+  padding-left: 33rem;
 }
 
 .arrow_up {

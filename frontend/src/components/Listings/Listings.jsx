@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { getAllListings } from '../../actions/listing';
 import ListingItem from './ListingItem';
 import { Fragment } from 'react';
+import { Input } from 'semantic-ui-react';
+
+import './Listing.css';
 
 function Listings({ getAllListings, listing: { listings } }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,9 +17,12 @@ function Listings({ getAllListings, listing: { listings } }) {
 
   return (
     <Fragment>
-      <div>
-        <input
+      <div className='listings__searchInput'>
+        <Input
           type='text'
+          size='large'
+          style={{ width: '40%' }}
+          icon='search'
           placeholder='Search by city'
           onChange={(event) => {
             setSearchTerm(event.target.value);

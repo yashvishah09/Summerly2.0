@@ -22,8 +22,11 @@ export const createListing = (data) => async (dispatch) => {
       'Content-Type': 'multipart/form-data'
     }
   };
+
+  
+
   try {
-    const res = await axios.post('/api/v1/listings', data, config);
+    const res = await axios.post('/api/v1/listings',data, config);
 
     dispatch({
       type: CREATE_LISTINGS,
@@ -54,7 +57,7 @@ export const updateListing = (formdata, id, history) => async (dispatch) => {
     }
   };
   try {
-    const res = await axios.patch(`/api/v1/listings/${id}`, formdata, config);
+    const res = await axios.put(`/api/v1/listings/${id}`, formdata, config);
 
     dispatch({
       type: UPDATE_LISTING,

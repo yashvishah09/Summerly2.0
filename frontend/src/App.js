@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './components/Home/Header';
@@ -24,7 +22,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import EditProfile from './components/Dashboard/EditProfile';
 import Listings from './components/Listings/Listings';
 import ShowListing from './components/Listings/ShowListing';
-import EditListing from './components/Dashboard/EditListing';
+import EditListing from './components/Listings/EditListing';
 
 function App() {
   if (localStorage.token) {

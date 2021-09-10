@@ -59,7 +59,7 @@ function SignIn(props) {
       ) : (
         <Segment style={{ width: '40%', marginLeft: '25%', marginTop: '5%' }}>
           <div className='sigin_welcome'>
-            <span>Welcome to Summerly</span>
+            <h4>Welcome to Summerly</h4>
           </div>
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Input label='Enter your email address' placeholder='email address' name='email' onChange={(e) => handleChange(e)} />
@@ -67,16 +67,16 @@ function SignIn(props) {
             <Form.Button content='Log in' />
           </Form>
 
-          <Link to='/forgotpassword'>
+          {/* <Link to='/forgotpassword'>
             <h5 className='signin_forgotpassword' onClick={() => setForgotPassword(true)}>
               Forgot Password
             </h5>
-          </Link>
+          </Link> */}
 
           <Link to='/signup'>
-            <h5 className='signin_createaccount' onClick={() => setCreateAccount(true)}>
-              Create Account
-            </h5>
+            <h6 className='signin_createaccount' onClick={() => setCreateAccount(true)}>
+              Not yet register? Create Account
+            </h6>
           </Link>
         </Segment>
       )}

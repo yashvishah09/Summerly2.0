@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Segment, Form, Grid, Dropdown } from 'semantic-ui-react';
+import { Segment, Form, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -37,12 +37,11 @@ function CreateAccount(props) {
     return <Redirect to='/' />;
   }
 
-  console.log(role);
   return (
     <div className='createAccount'>
       <Segment style={{ width: '40%', marginLeft: '25%', marginTop: '3%', border: 'none' }}>
         <div style={{ marginBottom: '1rem' }}>
-          <span>Sign up to Summerly</span>
+          <h5>Sign up to Summerly</h5>
         </div>
         <Form onSubmit={(e) => handleSubmit(e)}>
           <Grid columns={2}>
@@ -55,7 +54,8 @@ function CreateAccount(props) {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-          <div>
+          <div style={{ margin: '0.8rem 0' }}>
+            <p style={{ fontSize: '1rem', fontWeight: 'bold' }}>Are you a lister or looking for accomodation?</p>
             <select name='role' value={role} onChange={handleChange}>
               <option value='lister'>a lister</option>
               <option value='user'>finding accomodation</option>

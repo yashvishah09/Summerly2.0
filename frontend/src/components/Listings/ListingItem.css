@@ -1,24 +1,28 @@
-.listing {
+ .listingItem {
   width: 70%;
   min-width: 30%;
 }
 
-.listing__segment {
+.listingItem > span {
+  color: black;
+}
+
+.listingItem__segment {
   display: flex;
   height: 250px;
   margin-bottom: 10px !important;
 }
 
-.listing__image {
+.listingItem__image {
   width: 150px;
   height: 200px;
 }
 
-.listing__information {
+.listingItem__information {
   margin: 10px;
   margin-left: 15px;
 }
 
-.listing__rent {
+ .listingItem__rent {
   margin-left: 35%;
-}
+} 

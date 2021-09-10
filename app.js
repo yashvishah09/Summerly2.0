@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const busboy = require('connect-busboy');
+
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
@@ -15,8 +17,9 @@ const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
 
-app.set('view engine', 'pug');
+app.set('view engine', 'jsx');
 app.set('views', path.join(__dirname, 'views'));
+
 
 //1- GLOBAL MIDDLEWARES
 // Set security HTTP headers
